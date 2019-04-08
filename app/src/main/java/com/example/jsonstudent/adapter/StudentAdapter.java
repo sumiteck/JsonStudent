@@ -1,6 +1,7 @@
 package com.example.jsonstudent.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -8,7 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.jsonstudent.MainActivity;
 import com.example.jsonstudent.R;
+import com.example.jsonstudent.Student_Detail;
 import com.example.jsonstudent.model.Student;
 
 import java.util.List;
@@ -20,9 +23,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
     // The list of Native Express ads and menu items.
     private final List<Object> mRecyclerViewItems;
 
+
     public StudentAdapter(Context mContext, List<Object> mRecyclerViewItems) {
         this.mContext = mContext;
         this.mRecyclerViewItems = mRecyclerViewItems;
+
     }
 
     public class StudentHolder extends RecyclerView.ViewHolder {
@@ -65,6 +70,13 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
     @Override
     public void onBindViewHolder(StudentAdapter.StudentHolder holder, int position) {
         int viewType = getItemViewType(position);
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(view.getContext(), Student_Detail.class);
+                mContext.startActivity(intent);
+            }
+        });
         switch (viewType) {
             case MENU_ITEM_VIEW_TYPE:
             default:
@@ -80,7 +92,6 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentH
 
         }
     }
-
         @Override
         public int getItemCount() {
             return mRecyclerViewItems.size();
